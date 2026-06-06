@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Create Post Section */
+.create-post-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.create-post-section h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeInDown 0.8s ease;
+}
+
+.create-post-section form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease;
+}
+
+/* File Input Styling */
+.create-post-section input[type="file"] {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  padding: 60px 20px;
+  border: 2px dashed #667eea;
+  border-radius: 10px;
+  font-size: 16px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.create-post-section input[type="file"]:hover {
+  border-color: #764ba2;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  transform: translateY(-2px);
+}
+
+.create-post-section input[type="file"]::file-selector-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.create-post-section input[type="file"]::file-selector-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.create-post-section input[type="text"],
+.create-post-section textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.create-post-section input[type="text"]:focus,
+.create-post-section textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.create-post-section button {
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.create-post-section button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.create-post-section button:active {
+  transform: translateY(-1px);
+}
+
+/* Feed Section */
+.feed-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+}
+
+.feed-section h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeInDown 0.8s ease;
+}
+
+/* Post Card */
+.post_card {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  padding: 0;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+.post_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Container with Automatic Resizing */
+.post_card .image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+/* For 16:9 aspect ratio, use padding-top: 56.25% */
+/* For 4:3 aspect ratio, use padding-top: 75% */
+
+.post_card .post-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes the image cover the container while maintaining aspect ratio */
+  transition: transform 0.3s ease;
+}
+
+.post_card:hover .post-image {
+  transform: scale(1.05);
+}
+
+/* Post Content */
+.post_card .post-content {
+  padding: 20px;
+}
+
+.post_card h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.post_card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.post_card .post-caption {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 15px 0;
+  padding: 0 20px 20px 20px;
+}
+
+/* Post Actions */
+.post_card .post-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.post_card .post-actions button {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.post_card .post-actions button:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-post-section h1 {
+    font-size: 2rem;
+  }
+
+  .create-post-section form {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .feed-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .post_card {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-post-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .create-post-section form {
+    padding: 20px 15px;
+  }
+
+  .feed-section {
+    padding: 20px 10px;
+  }
+
+  .feed-section h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .post_card h2 {
+    font-size: 1.5rem;
+  }
+
+  .post_card p {
+    font-size: 1rem;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* No posts message */
+.no-posts {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
